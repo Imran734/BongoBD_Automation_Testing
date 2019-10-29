@@ -1,0 +1,92 @@
+package com.bongobd.automation.test;
+
+import java.util.Iterator;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+
+public class Login {
+
+	WebDriver driver;
+	
+	public void loginCheck()
+	{
+		try {
+
+			WebElement loginlink = driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/nav/div/div/div[2]/div[4]/ul/li[1]/a"));
+			loginlink.click();
+			WebElement logi = driver.findElement(By.id("regNext"));
+			logi.click();
+			Set<String> handl = driver.getWindowHandles();
+			Iterator<String> it = handl.iterator();
+			String pid = it.next();
+			String cid = it.next();
+			driver.switchTo().window(cid);
+			driver.findElement(By.id("u_0_6q")).sendKeys("1739862386");
+			driver.findElement(By.id("u_0_6r")).click();
+			driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
+			driver.findElement(By.id("u_0_2")).click();
+			//*****************Here is the code for testing registration process*****************//
+			/*driver.findElement(By.xpath("//*[@id=\"content\"]/div[1]/nav/div/div/div[2]/div[4]/ul/li[2]/a")).click();
+			driver.findElement(By.id("regNext")).click();
+			Set<String> handler = driver.getWindowHandles();
+			Iterator<String> itt = handler.iterator();
+			String parid = itt.next();
+			String chid = itt.next();
+			driver.switchTo().window(chid);
+			driver.findElement(By.id("u_0_6q")).sendKeys("1533387414");
+			driver.findElement(By.id("u_0_6r")).click();
+			driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(15, TimeUnit.SECONDS);
+			driver.findElement(By.id("u_0_2")).click();*/
+			//*****************Here is the code for testing registration process*****************//
+			
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+	public void contentCheck()
+	{
+		try {
+			System.setProperty("webdriver.chrome.driver", "G:\\Selenium\\chromedriver_win32\\chromedriver.exe");
+			driver = new ChromeDriver();
+			//driver.manage().window().maximize();
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(30, TimeUnit.SECONDS);
+			
+			driver.get("https://www.bongobd.com/");
+			driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+			WebElement lanchange = driver.findElement(By.className("caret"));
+			lanchange.click();
+			WebElement eng = driver.findElement(By.className("en"));
+			eng.click();
+			driver.findElement(By.xpath("/html/body/div[1]/div[1]/nav/div/div/div[2]/div[2]/ul/li[1]/a")).click();
+			driver.findElement(By.xpath("/html/body/div[1]/div[1]/nav/div/div/div[2]/div[2]/ul/li[2]/a")).click();
+			driver.findElement(By.xpath("/html/body/div[1]/div[1]/nav/div/div/div[2]/div[2]/ul/li[3]/a")).click();
+			driver.manage().timeouts().implicitlyWait(25, TimeUnit.SECONDS);
+			driver.manage().timeouts().pageLoadTimeout(25, TimeUnit.SECONDS);
+			loginCheck();
+		} 
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		Login lo = new Login();
+		lo.contentCheck();
+
+	}
+
+}
